@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Learning jQuery</title>
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script type="text/javascript" src="jquery-min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        
+        <style>
+            #draggable{
+                width:200px;
+                height:200px;
+                background-color: green;
+            }
+
+            #target{
+                width:300px;
+                height:300px;
+                background-color: rgb(240, 206, 13);
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1 id=header>This is my beautiful header.</h1>
+        <div id="draggable">
+            Drag me around
+        </div>
+
+        <div id="target">
+            Drop it here
+        </div>
+
+        <div id=accordion>
+            <h3>Titles</h3>
+            <p>This is some text. It is going to be quite long, so get ready. Like really, really long.This is some text. It is going to be quite long, so get ready. Like really, really long.This is some text. It is going to be quite long, so get ready. Like really, really long.</p>
+            <h3>Titles</h3>
+            <p>This is some text. It is going to be quite long, so get ready. Like really, really long.This is some text. It is going to be quite long, so get ready. Like really, really long.This is some text. It is going to be quite long, so get ready. Like really, really long.</p>
+            <h3>Titles</h3>
+            <p>This is some text. It is going to be quite long, so get ready. Like really, really long.This is some text. It is going to be quite long, so get ready. Like really, really long.This is some text. It is going to be quite long, so get ready. Like really, really long.</p>
+            <h3>Titles</h3>
+            <p>This is some text. It is going to be quite long, so get ready. Like really, really long.This is some text. It is going to be quite long, so get ready. Like really, really long.This is some text. It is going to be quite long, so get ready. Like really, really long.</p>
+            <h3>Titles</h3>
+            <p>This is some text. It is going to be quite long, so get ready. Like really, really long.This is some text. It is going to be quite long, so get ready. Like really, really long.This is some text. It is going to be quite long, so get ready. Like really, really long.</p>
+            <h3>Titles</h3>
+            <p>This is some text. It is going to be quite long, so get ready. Like really, really long.This is some text. It is going to be quite long, so get ready. Like really, really long.This is some text. It is going to be quite long, so get ready. Like really, really long.</p>
+            <h3>Titles</h3>
+            <p>This is some text. It is going to be quite long, so get ready. Like really, really long.This is some text. It is going to be quite long, so get ready. Like really, really long.This is some text. It is going to be quite long, so get ready. Like really, really long.</p>
+        </div>
+
+        <div>
+            <ul>
+                <li>pizza</li>
+
+                <li>cheese</li>
+
+                <li>bread</li>
+
+                <li>water</li>
+
+                <li>candy</li>
+
+                <li>pasta</li>
+
+                <li>cookies</li>
+
+            </ul>
+
+        </div>
+
+        <script>
+            $("#draggable").draggable();
+            $("#target").droppable({
+                drop: function (ui,event) {
+                    alert("Dropped")
+                    $("#target").css("background-color", "blue")
+                }
+            });
+
+            $("#accordion").accordion();
+            $("ul").sortable();
+        </script>
+     </body>
+</html>
+

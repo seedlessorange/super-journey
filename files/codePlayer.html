@@ -1,0 +1,224 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Learning jQuery</title>
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <style>
+            #wrapper{
+                width:100%;
+            }
+            body{
+                margin: 0;
+                padding:0;
+                font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+                font-weight: 300;
+            }
+            body, html {
+
+                height:100%;
+                width:100%;
+             }
+            #header{
+                width:100%;
+                height: 60px;
+                background: #2C3E50; /* fallback for old browsers */
+                background: -webkit-linear-gradient(to left, #2C3E50 , #FD746C); /* Chrome 10-25, Safari 5.1-6 */
+                background: linear-gradient(to left, #2C3E50 , #FD746C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            }
+            #title{
+                margin: 0 auto;
+                width: 40px;
+                float: left;
+                color: blanchedalmond;
+                
+                padding-bottom: 20px;
+                font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+                font-weight: 300;
+                font-size: 120%;
+            }
+            #toggle{
+                margin: 0 auto;
+                background: rgba(167, 163, 163, .5);
+                width: 300px;
+                height: 58px;
+                border: 1px solid ;
+                position: relative;
+                margin-top: 5px;
+                padding:  0px;
+            }
+            #toggle ul{
+                height:30px;
+            }
+            #toggle li {
+                float: left;
+                list-style:none;
+                padding: 5px 8px 5px 8px;
+                color: #f2f2f2;
+                text-align: center;
+                padding: 19px 16px;
+                text-decoration: none;
+                font-size: 17px;
+                
+                border-right:1px solid black;
+                border-width: 1px;
+            }
+
+            #toggle li:hover {
+                background-color: #ddd;
+                color: black;
+            }
+
+            .toggle li.active {
+                background-color: #4CAF50;
+                 color: white;
+            }
+
+            .codeContainer { 
+            width:50%;
+            float: left;
+            position:relative;
+            }
+
+            .codeContainer textarea{
+                width: 100%;
+                float: left;
+                height:100%;
+                border:none;
+                border-right: 1px solid gray;
+                font-family: monotype;
+                font-size: 90%;
+                padding: 5px;
+                box-sizing: border-box;
+                
+            }
+
+
+            #html{
+                background-color: rgb(204, 108, 108);
+                
+            }
+            #CSSContainer, #JSContainer{
+                display: none;
+            }
+        
+
+        
+            #buttonDiv{
+                float: right;
+                padding: 15px 10px 0 0;
+                
+
+            }
+
+            #runButton{
+                font-size: 140%;
+                font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+                font-weight: 300;
+            }
+
+            #clear{
+                clear: both;
+            }
+            #code-label{
+                position:absolute; 
+                right:20px;
+                top:10px; 
+                background-color:#FFF; 
+                padding:4px; 
+                border:1px solid grey; 
+                border-radius:4px;
+
+            }
+            iframe{
+                height:100%;
+                width: 100%;
+                position: relative;
+                left:20px;
+                border:none;
+                
+            }
+
+            .selected{
+                background-color: rgba(48, 48, 117, 0.616);
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id=wrapper>
+            <div id="header">
+                
+                <p id="title"> Clem's Codeplayer</p>
+                <div id="buttonDiv">
+                    <button id="runButton">Run</button>
+                </div>
+                <ul id="toggle">
+                    <li class="toggle selected">HTML</li>
+                    <li class="toggle">CSS</li>
+                    <li class="toggle">JS</li>
+                    <li style ="border:none;padding-right: 35.7px;";  class="toggle selected">Result</li>
+                </ul>
+
+            </div>
+
+           
+                 <div id="clear"></div>
+            
+                
+                <div class ="codeContainer" id="HTMLContainer">
+                    <span class="code-label">HTML</span>
+                    
+                    <textarea id="htmlInput" name="HTML">
+                    </textarea>
+                </div>
+
+                <div class ="codeContainer" id="CSSContainer">
+                    <span class="code-label">CSS</span>
+                    <textarea type="text" id="cssInput" name="CSS"></textarea>
+                </div>
+
+                <div class = "codeContainer" id="JSContainer">
+                    <span class="code-label">JS</span>
+                    <textarea type="text" id="jsInput" name="JS"></textarea>
+                </div>
+
+                <div class ="codeContainer" id="resultContainer">
+                    
+                    <span class="code-label">Result</span>
+                    <iframe id="resultFrame"></iframe>
+                </div>
+        <script>
+            
+            var windowHeight = $(window).height();
+            var menuBarHeight = $("#header").height();
+            
+            var codeContainerHeight = windowHeight-menuBarHeight;
+            $(".codeContainer").height(codeContainerHeight+"px")
+            
+            $(".toggle").click(function(){
+                $(this).toggleClass("selected");
+                var activeDiv = $(this).html();
+                $("#"+activeDiv+"Container").toggle();
+            
+
+            var showingDivs=$(".codeContainer").filter(function(){
+                return($(this).css("display")!="none");
+            }).length;
+            var width =100/showingDivs;
+
+            $(".codeContainer").css("width",width+"%");
+            
+
+        });
+
+        $("#runButton").click(function(){
+            $("iframe").contents().find("html").html("<style>"+$("#cssInput").val()+"</style>"+$("#htmlInput").val());
+        
+            document.getElementById("resultFrame").contentWindow.eval($("#jsInput").val());
+        });
+        </script>
+     </body>
+</html>
+

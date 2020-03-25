@@ -9,6 +9,7 @@
     </head>
 
     <body>
+        <h1 id=header>This is my beautiful header.</h1>
         <div>
             <p>Hey there! How are you?</p>
         </div>
@@ -20,7 +21,7 @@
             $.ajax({
                 url:"test.html"
             }).done(function(data){
-                alert(data);
+                $("#header").append(data);
             })
         </script>
      </body>
